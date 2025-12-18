@@ -1,14 +1,35 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
-import { Axios } from "axios";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 export default function login() {
+  const route = useRouter();
   const [user, setUser] = React.useState({
     email: "",
     password: "",
   });
-  const login = () => {};
+  const[buttonDisabled , setButtondisabled] = useState(false);
+  const login = async () => {
+    try {
+      const userD = await axios.post("/api/users/login" , user)
+      console.log(userD.data);
+      toast.success("Login Successfully")
+      route.push('/profile')
+      
+    } catch (error:any) {
+      toast.error(error.message)
+    }
+  };
+
+  useEffect(()=>{
+    if(user.email.length>0 && user.password.length>0) {
+      setButtondisabled(false);
+    } else {
+      setButtondisabled(true);
+    }
+  })
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100 text-black">
       <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
@@ -37,7 +58,7 @@ export default function login() {
             onClick={login}
             className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
           >
-            Login
+            {buttonDisabled ? "cant login " : "login"}
           </button>
         </div>
 
