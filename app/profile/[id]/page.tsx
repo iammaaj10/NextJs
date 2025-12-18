@@ -4,8 +4,8 @@ export default async function userProfilePage({ params }: any) {
 
   return (
     <div>
-      <h1>Profile page</h1>
-      <p>
+      <h1 className="text-center">Profile page</h1>
+      <p className="text-center">
         This is the{" "}
         <span className="text-red-500">{id}</span>
       </p>
