@@ -1,4 +1,4 @@
-import mongoose from  mongoose
+import mongoose from  'mongoose'
 
 const userSchema = new mongoose.Schema({
     username : {
@@ -26,9 +26,10 @@ const userSchema = new mongoose.Schema({
     forgetPasswordToken : String,
     forgetPasswordExpiryToken : Date,
     verifyToken :String,
-    verifyExpiryToken : date
+    verifyExpiryToken : Date
 
 })
 
-const User = mongoose.model("Users" , userSchema);
+const User = mongoose.models.Users || mongoose.model("Users", userSchema);
+
 export default User

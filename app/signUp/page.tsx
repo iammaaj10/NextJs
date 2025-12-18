@@ -2,16 +2,36 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function signUpPage() {
+  const route = useRouter()
   const [user, setUser] = React.useState({
     username: "",
     email: "",
     password: "",
   });
+  const [buttondisabled , setButtondisabled] = useState(false);
 
-  const signUp = async () => {};
+  useEffect(() =>{
+    if(user.username.length>0 && user.email.length>0 && user.password.length>0) {
+      setButtondisabled(false);
+    } else {
+      setButtondisabled(true)
+    }
+  },[user])
+
+  const signUp = async () => {
+    try {
+        const res = await axios.post("/api/users/signup" , user)
+        console.log(res.data);
+        route.push('/login')
+        
+    } catch (error : any) {
+      toast.error(error.message)
+    }
+  };
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100 text-black">
@@ -47,7 +67,7 @@ export default function signUpPage() {
             onClick={signUp}
             className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
           >
-            Sign Up
+            {buttondisabled ? "No signUp" : "SignUp"}
           </button>
         </div>
 
