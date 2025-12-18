@@ -1,21 +1,22 @@
-"use client"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import React from "react"
-import { Axios } from "axios"
+"use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { Axios } from "axios";
 export default function login() {
-    const [user , setUser] = React.useState({
-        email:"",
-        password:""
-    })
-    const login = () =>{}
-    return (
-         <div className="min-h-screen flex justify-center items-center bg-gray-100 text-black">
+  const [user, setUser] = React.useState({
+    email: "",
+    password: "",
+  });
+  const login = () => {};
+  return (
+    <div className="min-h-screen flex justify-center items-center bg-gray-100 text-black">
       <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
-        <h1 className="text-3xl font-bold text-center mb-6 text-black">Login</h1>
+        <h1 className="text-3xl font-bold text-center mb-6 text-black">
+          Login
+        </h1>
 
         <div className="space-y-4">
-          
           <input
             type="text"
             value={user.email}
@@ -48,5 +49,5 @@ export default function login() {
         </p>
       </div>
     </div>
-    )
+  );
 }
