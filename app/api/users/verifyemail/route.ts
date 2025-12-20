@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     user.verifyToken = undefined;
     user.verifyExpiryToken = undefined;
     await user.save();
-    
+
     return NextResponse.json({
       message: "email is verify successfully",
       success: true,
